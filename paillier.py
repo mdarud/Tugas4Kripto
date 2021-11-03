@@ -29,3 +29,33 @@ class Paillier:
     def decrypt(c, l, mu, n):
         def L(x): return (x - 1)//n
         return (L(pow(c, l, n*n)) * mu) % n
+
+    def save_public_key(filename, g, n):
+        f = open(filename, 'wt')
+        f.write(str(g) + ',' + str(n))
+        f.close()
+
+    def save_private_key(filename, l, mu):
+        f = open(filename, 'wt')
+        f.write(str(l) + ',' + str(mu))
+        f.close()
+
+    def load_public_key(filename):
+        f = open(filename, 'r')
+        g, n = f.read().split(',')
+        return int(g), int(n)
+
+    def load_private_key(filename):
+        f = open(filename, 'r')
+        l, mu = f.read().split(',')
+        return int(l), int(mu)
+
+    def save_output(filename, c):
+        f = open(filename, 'wt')
+        f.write(str(c))
+        f.close()
+
+    def load_output(filename):
+        f = open(filename, 'rt')
+        c = f.read()
+        return int(c)

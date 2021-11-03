@@ -148,3 +148,23 @@ def int_to_str(m):
         c = chr(int(_m[i:i+3]))
         x += c
     return x
+
+
+def bin_to_int(m):
+    _m = ""
+    for b in m:
+        i_b = str(int(b))
+        i_b = "0" * (3 - len(i_b)) + i_b
+        _m += i_b
+    return int(_m)
+
+
+def int_to_bin(m):
+    _m = str(m)
+    _m = "0" * ((3 - (len(_m) % 3)) if len(_m) % 3 > 0 else 0) + _m
+    x = bytes()
+    for i in range(0, len(_m), 3):
+        b = int(_m[i:i+3])
+        b = b.to_bytes(1, 'big')
+        x += b
+    return x

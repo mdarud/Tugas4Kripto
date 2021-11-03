@@ -1,6 +1,23 @@
 from paillier import Paillier
 import utils
 from ECEG import ECEG
+from RSA import RSA
+from elgamal import elgamal
+
+m = 'Halo ini saya'
+print('=====RSA=====')
+e, d, n = RSA.genKey()
+c = RSA.encrypt(m, e, n)
+p = RSA.decrypt(c, d, n)
+print(c)
+print(p)
+
+print('=====ElGamal=====')
+y, x, g, p = elgamal.genKey()
+c = elgamal.encrypt(m, y, g, p)
+p = elgamal.decrypt(c, x, p)
+print(c)
+print(p)
 
 m = 'Pesan yang akan dienkripsi dengan ECC harus dikonversi (encoding) menjadi titik di dalam kurva eliptik.'
 

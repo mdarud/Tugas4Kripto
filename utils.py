@@ -92,6 +92,45 @@ def genECPoints(a, b, p, start=0, n=20):
     return points
 
 
+def multi_inverse(e, totient):
+    d = 0
+    x1 = 0
+    x2 = 1
+    y1 = 1
+    temp_totient = totient
+
+    while e > 0:
+        temp1 = temp_totient//e
+        temp2 = temp_totient - temp1 * e
+        temp_totient = e
+        e = temp2
+
+        x = x2 - temp1 * x1
+        y = d - temp1 * y1
+
+        x2 = x1
+        x1 = x
+        d = y1
+        y1 = y
+
+    if temp_totient == 1:
+        return d + totient
+
+
+def genE(totient):
+    while (True):
+        e = randrange(2, totient)
+        if (gcd(e, totient) == 1):
+            return e
+
+
+def genPrimeRange(start, end):
+    while (True):
+        res = randrange(start, end)
+        if (is_prime(res)):
+            return res
+
+
 def str_to_int(m):
     _m = ""
     for c in m:
